@@ -18,13 +18,13 @@ if __name__ == '__main__':
   datas = op.findAll()
   for data in datas:
     print(data)
-  
+  '''
   datas = op.findByName('叶问')
   for data in datas:
     print(data)
-  ''' 
-  
+   
+  '''
   datas = op.findByScore(7,8)
   for data in datas:
     print(data)
-  
+  '''

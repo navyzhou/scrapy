@@ -15,7 +15,8 @@ class MoviespiderSpider(scrapy.Spider):
   # 可选。包含了spider允许爬取的域名(domain)列表(list)。 当 OffsiteMiddleware启用时， 域名不在列表中的URL不会被跟进。
   allowed_domains = ["1905.com"] 
   
-  # URL列表。当没有制定特定的URL时，spider将从该列表中开始进行爬取。 因此，第一个被获取到的页面的URL将是该列表之一。 后续的URL将会从获取到的数据中提取。
+  # URL列表。当没有制定特定的URL时，spider将从该列表中开始进行爬取。 因此，第一个被获取到的页面的URL将是该列表之一。 
+  # 后续的URL将会从获取到的数据中提取。
   start_urls = ['https://www.1905.com/vod/list/n_1/o3p1.html'] 
 	
 	

@@ -67,7 +67,20 @@ class Movie1905DownloaderMiddleware:
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
-
+	''' 
+		当每个request通过下载中间件时，该方法被调用。
+		process_request() 必须返回以下其中之一：一个 None 、一个 Response 对象、一个 Request 对象或 raise IgnoreRequest:
+			如果其返回 None ，Scrapy将继续处理该request，执行其他的中间件的相应方法，直到合适的下载器处理函数(download handler)被调用， 
+				该request被执行(其response被下载)。
+			如果其返回 Response 对象，Scrapy将不会调用任何其他的 process_request() 或process_exception() 方法，或相应地下载函数； 
+				其将返回该response。 已安装的中间件的process_response() 方法则会在每个response返回时被调用。
+			如果其返回 Request 对象，Scrapy则停止调用process_request方法并重新调度返回的request。当新返回的request被执行后，
+				相应地中间件链将会根据下载的response被调用。
+			如果其raise一个 IgnoreRequest 异常，则安装的下载中间件的 process_exception() 方法会被调用。如果没有任何一个方法处理该异常， 则request的errback(Request.errback)方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。
+		参数:
+			request (Request 对象) – 处理的request
+			spider (Spider 对象) – 该request对应的spider
+	'''
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
         # middleware.
@@ -79,7 +92,21 @@ class Movie1905DownloaderMiddleware:
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
         return None
+	'''
+		当下载器完成http请求，传递响应给引擎的时候调用
+		process_request() 必须返回以下其中之一: 返回一个 Response 对象、 返回一个 Request 对象或raise一个 IgnoreRequest 异常。
 
+		如果其返回一个 Response (可以与传入的response相同，也可以是全新的对象)， 
+			该response会被在链中的其他中间件的 process_response() 方法处理。
+		如果其返回一个 Request 对象，则中间件链停止， 返回的request会被重新调度下载。
+			处理类似于 process_request() 返回request所做的那样。
+		如果其抛出一个 IgnoreRequest 异常，则调用request的errback(Request.errback)。 
+			如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。
+		参数:
+			request (Request 对象) – response所对应的request
+			response (Response 对象) – 被处理的response
+			spider (Spider 对象) – response所对应的spider
+	'''
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
 

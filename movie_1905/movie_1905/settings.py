@@ -37,7 +37,9 @@ ROBOTSTXT_OBEY = True
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+# 网站可能会检测Cookie中session_id的使用次数，如果超过限制，就触发反爬策略。所以可以在Scrapy中设置COOKIES_ENABLED=False让请求不带Cookies。
+# 也有网站强制开启Cookis，这时就要麻烦一点了。可以另写一个简单的爬虫，定时向目标网站发送不带Cookies的请求，提取响应中Set-cookie字段信息并保存。爬取网页时，把存储起来的Cookies带入Headers中。
+# COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -57,6 +59,7 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
+# 激活下载器中间件组件
 #DOWNLOADER_MIDDLEWARES = {
 #    'movie_1905.middlewares.Movie1905DownloaderMiddleware': 543,
 #}

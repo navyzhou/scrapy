@@ -59,7 +59,7 @@ class MoviespiderSpider(scrapy.Spider):
       url = response.xpath("//section[@id='vod-page']/a[@class='next']/@href").extract_first()
 
       try:
-        wait =WebDriverWait(self.driver, 5)
+        wait = WebDriverWait(self.driver, 5)
         wait.until(lambda driver:driver.find_element_by_xpath("//section[@id='vod-page']/a[@class='next']")) # 下一页地址
         next_page = self.driver.find_element_by_xpath("//section[@id='vod-page']/a[@class='next']")
         next_page.click() # 模拟点击下一页

@@ -11,7 +11,7 @@ import codecs
 import json
 
 class Movie1905Pipeline:
-	def process_item(self, item, spider):  # spider : 蜘蛛
+	def process_item(self, items, spider):  # spider : 蜘蛛
 		# now = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime());
 		now = time.strftime('%Y-%m-%d', time.localtime())
 		fileName = now + '.json'  #以当前日期为文件名
@@ -33,6 +33,6 @@ class Movie1905Pipeline:
 		#False             false
 		#None              null
 		# fp.write(item['movieName'] + ' ' + item['movieScore'] + ' ' + item['moviePic'])
-			line = json.dumps(dict(item), ensure_ascii=False) + '\r\n'
+			line = json.dumps(dict(items), ensure_ascii=False) + '\r\n'
 			fp.write(line) # 将数据写到指定的文件中
 		return item # 会在控制台显示
